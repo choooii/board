@@ -7,22 +7,12 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.1/font/bootstrap-icons.css">
     <link rel="stylesheet" href="/application/view/css/main.css">
-    <title>Login</title>
+    <title>Search</title>
 </head>
 <body>
     <?php require_once(_PATH_HEADER._EXTENSION_PHP) ?>
     <div class="container">
-        <h1>Login</h1>
-        <h3 style="color: red;"><?php echo isset($this->errMsg) ? $this->errMsg : "" ; ?></h3>
-        <form action="/user/login" method="post">
-            <label for="id">ID</label>
-            <input type="text" id="id" name="id">
-            <br>
-            <br>
-            <label for="pw">PW</label>
-            <input type="text" id="pw" name="pw">
-            <button type="submit">LOGIN</button>
-        </form>
+        서치
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
 </body>

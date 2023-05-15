@@ -7,23 +7,21 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.1/font/bootstrap-icons.css">
     <link rel="stylesheet" href="/application/view/css/main.css">
-    <title>Login</title>
+    <title>Home</title>
 </head>
 <body>
     <?php require_once(_PATH_HEADER._EXTENSION_PHP) ?>
     <div class="container">
-        <h1>Login</h1>
-        <h3 style="color: red;"><?php echo isset($this->errMsg) ? $this->errMsg : "" ; ?></h3>
-        <form action="/user/login" method="post">
-            <label for="id">ID</label>
-            <input type="text" id="id" name="id">
-            <br>
-            <br>
-            <label for="pw">PW</label>
-            <input type="text" id="pw" name="pw">
-            <button type="submit">LOGIN</button>
-        </form>
+        <!-- 배너 -->
+        <div>
+            <h1>쇼핑몰 페이지 제작 실습</h1>
+        </div>
+        <!-- 카드 -->
+        <div class="row row-cols-xxl-4">
+            <?php $this->printAllList(); ?>
+        </div>
     </div>
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

@@ -7,8 +7,8 @@ class Application{
     // 생성자
     public function __construct() {
         $arrPath = UrlUtil::getUrlArrPath(); // 접속 URL을 배열로 획득
-        $identityName = empty($arrPath[0]) ? "User" : ucfirst($arrPath[0]);
-        $action = (empty($arrPath[1]) ? "login" : $arrPath[1]).ucfirst(strtolower($_SERVER["REQUEST_METHOD"]));
+        $identityName = empty($arrPath[0]) ? "Product" : ucfirst($arrPath[0]);
+        $action = (empty($arrPath[1]) ? "home" : $arrPath[1]).ucfirst(strtolower($_SERVER["REQUEST_METHOD"]));
         
         // controller명 작성
         $controllerPath = _PATH_CONTROLLER.$identityName._BASE_FILENAME_CONTROLLER._EXTENSION_PHP;

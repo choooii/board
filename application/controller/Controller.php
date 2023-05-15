@@ -10,7 +10,7 @@ use \AllowDynamicProperties;
 class Controller {
     protected $model;
     private static $modelList = [];
-    private static $arrNeedAuth = ["product/list"];
+    private static $arrNeedAuth = []; //"product/list"
     
     // 생성자
     public function __construct($identityName, $action) {
