@@ -1,6 +1,6 @@
 <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark mb-lg-5" id="navbar">
     <div class="container-fluid">
-        <a class="navbar-brand" href="/product/home">Home</a>
+        <a class="navbar-brand" href="">Home</a>
         <button class="navbar-toggler custom-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -24,8 +24,10 @@
                     <li class="nav-item">
                     <a class="nav-link" href="/user/login">로그인</a>
                     </li>
+                    <li class="nav-item">
+                    <a class="nav-link" href="/user/registration">회원가입</a>
+                    </li>
                 <?php }?>
-                
             </ul>
             <form class="d-flex">
                 <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">

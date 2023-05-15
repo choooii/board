@@ -6,6 +6,10 @@ class UserController extends Controller {
         return "login"._EXTENSION_PHP;
     }
 
+    public function registrationGet() {
+        return "registration"._EXTENSION_PHP;
+    }
+
     public function loginPost() {
         $result = $this->model->getUser($_POST);
         // 유저 유무 체크
@@ -28,6 +32,6 @@ class UserController extends Controller {
         session_unset();
         session_destroy();
 
-        return "home"._EXTENSION_PHP;
+        return _BASE_REDIRECT."/product/home";
     }
 }
