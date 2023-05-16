@@ -21,7 +21,7 @@
             <br>
             <label for="pw">PW</label>
             <input type="text" id="pw" name="pw">
-            <button type="submit">LOGIN</button>
+            <button type="submit" class="btn btn-dark btn-sm">LOGIN</button>
         </form>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>

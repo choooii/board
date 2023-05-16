@@ -1,6 +1,6 @@
 <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark mb-lg-5" id="navbar">
     <div class="container-fluid">
-        <a class="navbar-brand" href="">Home</a>
+        <a class="navbar-brand" href="/product/home">Home</a>
         <button class="navbar-toggler custom-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -17,6 +17,9 @@
                 </li>
                 <?php if(array_key_exists(_STR_LOGIN_ID, $_SESSION)) { ?>
                     <li class="nav-item">
+                    <a class="nav-link" href="/user/update">마이페이지</a>
+                    </li>
+                    <li class="nav-item">
                     <a class="nav-link" href="/user/logout">로그아웃</a>
                     </li>
                 <?php }
@@ -30,7 +33,7 @@
                 <?php }?>
             </ul>
             <form class="d-flex">
-                <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                <input id="search" class="form-control me-2" type="text" placeholder="Search" aria-label="Search">
                 <button class="btn" type="submit">
                     <i class="bi bi-search custom-i"></i>
                 </button>

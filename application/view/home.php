@@ -14,7 +14,7 @@
     <div class="container">
         <!-- 배너 -->
         <div>
-            <h1>쇼핑몰 페이지 제작 실습</h1>
+            <h1>홈</h1>
         </div>
         <!-- 카드 -->
         <div class="row row-cols-xxl-4">

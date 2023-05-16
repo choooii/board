@@ -14,6 +14,10 @@
     <div class="container">
         <h1>검색</h1>
     </div>
+
+    <?php
+    var_dump($_POST); 
+    ?>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

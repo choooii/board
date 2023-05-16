@@ -3,13 +3,22 @@
 namespace application\model;
 
 class ProductModel extends Model{
-    public function getAllPro() {
+    public function getAllPro($proFlg = "", $num = 0) {
         $sql = 
             " SELECT * " 
             ." FROM pro_list "
             ;
 
+        if($num !== 0 && $proFlg !== "") {
+            $sql .= " WHERE ".$proFlg." = :".$proFlg;
+        }
+
         $prepare = [];
+
+        if($num !== 0) {
+            $prepare[":".$proFlg] = $num;
+        }
+
         try {
             $stmt = $this->conn->prepare($sql);
             $stmt->execute($prepare);
@@ -18,53 +27,7 @@ class ProductModel extends Model{
         } catch(Exception $e) {
             echo "ProductModel->getAllPro Error : ".$e->getMessage();
             exit();
-        } finally {
-            $this->closeConn();
         }
         return $result;
-    }
-
-    public function getProList($pro_cate) {
-        $sql = 
-            " SELECT * " 
-            ." FROM pro_list "
-            ." WHERE pro_cate = :pro_cate "
-            ;
-
-        $prepare = [":pro_cate"   => $pro_cate];
-        try {
-            $stmt = $this->conn->prepare($sql);
-            $stmt->execute($prepare);
-            $result = $stmt->fetchAll();
-
-        } catch(Exception $e) {
-            echo "ProductModel->getProList Error : ".$e->getMessage();
-            exit();
-        } finally {
-            $this->closeConn();
-        }
-        return $result;
-    }
-
-    public function getDetail($pro_no){
-        $sql = 
-            " SELECT * " 
-            ." FROM pro_list "
-            ." WHERE pro_no = :pro_no "
-            ;
-
-        $prepare = [":pro_no"   => $pro_no];
-        try {
-            $stmt = $this->conn->prepare($sql);
-            $stmt->execute($prepare);
-            $result = $stmt->fetchAll();
-
-        } catch(Exception $e) {
-            echo "ProductModel->getDetail Error : ".$e->getMessage();
-            exit();
-        } finally {
-            $this->closeConn();
-        }
-        return $result[0];
     }
 }

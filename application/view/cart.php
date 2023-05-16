@@ -1,7 +1,3 @@
-<?php
-$result = $_GET;
-$pro_no = $result['pro_no'];
-?>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -16,9 +12,7 @@ $pro_no = $result['pro_no'];
 <body>
     <?php require_once(_PATH_HEADER._EXTENSION_PHP) ?>
     <div class="container">
-        <?php $this->echoDetailInfo($pro_no) ?>
-        <button type="button" class="btn btn-outline-dark" onclick="location.href='/product/cart';">장바구니</button>
-        <button type="button" class="btn btn-dark">구매하기</button>
+        <h1>장바구니</h1>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
 </body>

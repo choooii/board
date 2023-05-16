@@ -31,7 +31,7 @@ h1 {
 }
 
 label {
-    width: 30px;
+    width: 70px;
 }
 
 h5 {
@@ -41,4 +41,9 @@ h5 {
 
 a {
     text-decoration: none;
+}
+
+.img-custom {
+    max-width: 30%;
+    min-width: 300px;
 }
