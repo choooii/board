@@ -1,7 +1,3 @@
-<?php
-$result = $_GET;
-$cate_no = $result['cate_no'];
-?>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -20,9 +16,14 @@ $cate_no = $result['cate_no'];
         <div>
             <h1>리스트</h1>
         </div>
+        <h3 style="color: red;"><?php echo isset($this->errMsg) ? $this->errMsg : "" ; ?></h3>
         <!-- 카드 -->
         <div class="row row-cols-xxl-4">
-            <?php $this->printList($cate_no); ?>
+            <?php 
+            foreach ($this->arrResult as $val) {
+                echo $val;
+            }
+            ?>
         </div>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>

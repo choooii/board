@@ -3,7 +3,7 @@
 namespace application\model;
 
 class ProductModel extends Model{
-    public function getAllPro($proFlg = "", $num = 0) {
+    public function getPro($proFlg = "", $num = 0) {
         $sql = 
             " SELECT * " 
             ." FROM pro_list "
@@ -15,7 +15,7 @@ class ProductModel extends Model{
 
         $prepare = [];
 
-        if($num !== 0) {
+        if($num !== 0 && $proFlg !== "") {
             $prepare[":".$proFlg] = $num;
         }
 
@@ -25,7 +25,7 @@ class ProductModel extends Model{
             $result = $stmt->fetchAll();
 
         } catch(Exception $e) {
-            echo "ProductModel->getAllPro Error : ".$e->getMessage();
+            echo "ProductModel->getPro Error : ".$e->getMessage();
             exit();
         }
         return $result;

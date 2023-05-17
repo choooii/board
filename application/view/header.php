@@ -1,4 +1,4 @@
-<nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark mb-lg-5" id="navbar">
+<nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark mb-lg-5 navbar-custom" id="navbar">
     <div class="container-fluid">
         <a class="navbar-brand" href="/product/home">Home</a>
         <button class="navbar-toggler custom-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">

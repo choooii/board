@@ -1,3 +1,20 @@
+<?php
+$httpMethod = $_SERVER["REQUEST_METHOD"];
+$idVal = "";
+$pwVal = "";
+$pwChkVal = "";
+$nameVal = "";
+
+if ( $httpMethod === "POST" ) {
+    $getPost = $_POST;
+
+    $idVal = $getPost["id"];
+    $pwVal = $getPost["pw"];
+    $pwChkVal = $getPost["pwChk"];
+    $nameVal = $getPost["name"];
+
+}
+?>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -20,7 +37,7 @@
         <?php } ?>
         <form action="/user/registration" method="POST">
             <label for="id">ID</label>
-            <input type="text" id="id" name="id" value="">
+            <input type="text" id="id" name="id" value="<? echo $idVal ?>">
             <button type="button" onclick="chkDuplication()" class="btn btn-outline-dark btn-sm">중복체크</button>
             <span id="errMsgId">
                 <?php if(isset($this->arrError["id"])) { 
@@ -30,7 +47,7 @@
             <br>
             <br>
             <label for="pw">PW</label>
-            <input type="text" id="pw" name="pw">
+            <input type="text" id="pw" name="pw" value="<? echo $pwVal ?>">
             <span>
                 <?php if(isset($this->arrError["pw"])) { 
                     echo $this->arrError["pw"]; 
@@ -39,7 +56,7 @@
             <br>
             <br>
             <label for="pwChk">PW 확인</label>
-            <input type="text" id="pwChk" name="pwChk">
+            <input type="text" id="pwChk" name="pwChk" value="<? echo $pwChkVal ?>">
             <span>
                 <?php if(isset($this->arrError["pwChk"])) { 
                     echo $this->arrError["pwChk"]; 
@@ -48,7 +65,7 @@
             <br>
             <br>
             <label for="name">이름</label>
-            <input type="text" id="name" name="name">
+            <input type="text" id="name" name="name" value="<? echo $nameVal ?>">
             <span>
                 <?php if(isset($this->arrError["name"])) { 
                     echo $this->arrError["name"]; 

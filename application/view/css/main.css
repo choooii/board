@@ -12,6 +12,10 @@
     font-family: 'Pretendard-Regular';
 }
 
+.navbar-custom {
+    background-color: rgba(0, 0, 0, 0.452);
+}
+
 .container {
     padding-top: 5rem;
 }

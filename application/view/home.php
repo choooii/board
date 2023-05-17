@@ -16,9 +16,14 @@
         <div>
             <h1>홈</h1>
         </div>
+        <h3 style="color: red;"><?php echo isset($this->errMsg) ? $this->errMsg : "" ; ?></h3>
         <!-- 카드 -->
         <div class="row row-cols-xxl-4">
-            <?php $this->printAllList(); ?>
+            <?php 
+            foreach ($this->arrResult as $val) {
+                echo $val;
+            } 
+            ?>
         </div>
     </div>
 
