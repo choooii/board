@@ -7,27 +7,27 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.1/font/bootstrap-icons.css">
     <link rel="stylesheet" href="/application/view/css/main.css">
-    <title>List</title>
+    <title>My Page</title>
 </head>
 <body>
-    <?php require_once(_PATH_HEADER._EXTENSION_PHP) ?>
+    <?php
+    require_once(_PATH_HEADER._EXTENSION_PHP)
+    ?>
     <div class="container">
-        <!-- 배너 -->
-        <div>
-            <h1>리스트</h1>
-        </div>
-        <h3 style="color: red;"><?php echo isset($this->errMsg) ? $this->errMsg : "" ; ?></h3>
-        <!-- 카드 -->
-        <div class="row row-cols-xxl-4">
-            <?php
-            if (!empty($this->arrResult)){
-                foreach ($this->arrResult as $val) {
-                    echo $val;
-                }
-            }
-            ?>
-        </div>
+        <h1>마이페이지</h1>
+        <form action="/user/update" method="post">
+            <label for="id">ID</label>
+            <span><?php echo $this->result['u_id'] ?></span>
+            <br>
+            <br>
+            <label for="name">이름</label>
+            <span><?php echo $this->result['u_name'] ?></span>
+            <br>
+            <br>
+            <button class="btn btn-outline-dark btn-sm" type="button" onclick="location.href='/user/update';">회원 정보 수정</button>
+        </form>
     </div>
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

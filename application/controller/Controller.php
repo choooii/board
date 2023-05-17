@@ -10,7 +10,8 @@ use \AllowDynamicProperties;
 class Controller {
     protected $model;
     private static $modelList = [];
-    private static $arrNeedAuth = []; //"product/list"
+    private static $arrNeedAuth = ["product/cart"];
+    private static $arrNeedlessAuth = ["user/login", "user/registration"];
     
     // 생성자
     public function __construct($identityName, $action) {
@@ -70,7 +71,13 @@ class Controller {
             if (!isset($_SESSION[_STR_LOGIN_ID]) && strpos($urlPath, $authPath) === 0) {
                 header(_BASE_REDIRECT."/user/login");
                 exit;
-            } 
+            }
+        }
+        foreach (self::$arrNeedlessAuth as $authPath) {
+            if (isset($_SESSION[_STR_LOGIN_ID]) && strpos($urlPath, $authPath) === 0) {
+                header(_BASE_REDIRECT."/product/home");
+                exit;
+            }
         }
     }
     

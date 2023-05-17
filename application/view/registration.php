@@ -1,19 +1,15 @@
 <?php
 $httpMethod = $_SERVER["REQUEST_METHOD"];
 $idVal = "";
-$pwVal = "";
-$pwChkVal = "";
 $nameVal = "";
 
 if ( $httpMethod === "POST" ) {
     $getPost = $_POST;
 
     $idVal = $getPost["id"];
-    $pwVal = $getPost["pw"];
-    $pwChkVal = $getPost["pwChk"];
     $nameVal = $getPost["name"];
-
 }
+
 ?>
 <!DOCTYPE html>
 <html lang="ko">
@@ -47,7 +43,7 @@ if ( $httpMethod === "POST" ) {
             <br>
             <br>
             <label for="pw">PW</label>
-            <input type="text" id="pw" name="pw" value="<? echo $pwVal ?>">
+            <input type="text" id="pw" name="pw" oninput="chkPassword();">
             <span>
                 <?php if(isset($this->arrError["pw"])) { 
                     echo $this->arrError["pw"]; 
@@ -56,8 +52,8 @@ if ( $httpMethod === "POST" ) {
             <br>
             <br>
             <label for="pwChk">PW 확인</label>
-            <input type="text" id="pwChk" name="pwChk" value="<? echo $pwChkVal ?>">
-            <span>
+            <input type="text" id="pwChk" name="pwChk" oninput="chkPassword();">
+            <span id="chk_pw_msg">
                 <?php if(isset($this->arrError["pwChk"])) { 
                     echo $this->arrError["pwChk"]; 
                 } ?>

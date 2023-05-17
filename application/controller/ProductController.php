@@ -40,7 +40,7 @@ class ProductController extends Controller {
 
         $result = $this->model->getPro("pro_no", $pro_no);
         $this->model->closeConn();
-        if (count($result[0]) === 0) {
+        if (empty($result[0])) {
             $errMsg = $pro_no."번 상품 정보가 없습니다.";
             $this->addDynamicProperty('errMsg', $errMsg);
             return "detail"._EXTENSION_PHP;

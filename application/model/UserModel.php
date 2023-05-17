@@ -4,7 +4,7 @@ namespace application\model;
 
 class UserModel extends Model{
     public function getUser($arrUserInfo, $pwFlg = true) {
-        $sql = " SELECT * FROM user_info WHERE u_id = :id";
+        $sql = " SELECT * FROM user_info WHERE u_id = :id AND u_flg = '0' ";
 
         if($pwFlg) {
             $sql .= " AND u_pw = :pw ";

@@ -18,6 +18,14 @@ class UserController extends Controller {
         return "update"._EXTENSION_PHP;
     }
 
+    public function infoGet() {
+        $getSession['id'] = $_SESSION['u_id'];
+        $result = $this->echoUserInfo($getSession);
+
+        $this->addDynamicProperty('result', $result);
+        return "info"._EXTENSION_PHP;
+    }
+
     public function loginPost() {
         $result = $this->model->getUser($_POST);
         $this->model->closeConn();
@@ -46,20 +54,20 @@ class UserController extends Controller {
 
     public function valChk($arr) {
         $arrChk = [];
-        // todo 영문자, 숫자 체크
-
-        // id 유효성 체크
-        if(array_key_exists("id", $arr)){
-            if(mb_strlen($arr["id"]) > 12 || mb_strlen($arr["id"]) < 4) {
-                $arrChk["id"] = "ID는 4글자 이상 12글자 이하로 입력해주세요.";
+        // id 영문자, 숫자 체크
+        $pattern = "/[^a-z0-9]/";
+            if(preg_match($pattern, $arr["id"]) !== 0) {
+                $arrChk["id"] = "ID는 영어 소문자, 숫자만 입력해주세요.";
+                // id 글자수 유효성 체크
+            } else {
+                if(mb_strlen($arr["id"]) > 12 || mb_strlen($arr["id"]) < 4) {
+                    $arrChk["id"] = "ID는 4글자 이상 12글자 이하로 입력해주세요.";
+                }
             }
-        }
-
+        
         // PW 글자수 체크
-        if(array_key_exists("pw", $arr)){
-            if (mb_strlen($arr["pw"]) < 8 || mb_strlen($arr["pw"]) > 20) {
-                $arrChk["pw"] = "비밀번호는 8~20글자로 입력해주세요.";
-            }
+        if (mb_strlen($arr["pw"]) < 8 || mb_strlen($arr["pw"]) > 20) {
+            $arrChk["pw"] = "비밀번호는 8~20글자로 입력해주세요.";
         }
 
         // 비밀번호와 비밀번호 체크
@@ -72,11 +80,10 @@ class UserController extends Controller {
         // todo 비밀번호 영문 숫자 특수문자 체크
 
         // 이름 글자수 체크
-        if(array_key_exists("name", $arr)){
-            if(mb_strlen($arr["name"]) > 30 || mb_strlen($arr["name"]) === 0) {
-                $arrChk["name"] = "이름은 30글자 이하로 입력해주세요.";
-            }
+        if(mb_strlen($arr["name"]) > 30 || mb_strlen($arr["name"]) < 3) {
+            $arrChk["name"] = "이름은 30글자 이하 3글자 이상으로 입력해주세요.";
         }
+
 
         return $arrChk;
     }
@@ -122,6 +129,8 @@ class UserController extends Controller {
         $arrPost = $_POST;
         $arrChkErr = [];
 
+        // todo POST값과 중복체크
+
         // 유효성 체크
         $arrChkErr = $this->valChk($arrPost);
         if(!empty($arrChkErr)) {
@@ -152,8 +161,9 @@ class UserController extends Controller {
         $this->model->closeConn();
 
         if (count($result) === 0) {
-            echo $errMsg = $getSession['id']." 회원이 없습니다.";
-            exit;
+            $errMsg = $getSession['id']."번 회원이 없습니다.";
+            $this->addDynamicProperty('errMsg', $errMsg);
+            return "update"._EXTENSION_PHP;
         }
 
         return $result[0];

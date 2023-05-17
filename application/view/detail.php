@@ -12,7 +12,11 @@
 <body>
     <?php require_once(_PATH_HEADER._EXTENSION_PHP) ?>
     <div class="container">
-        <?php echo $this->resultHTML ?>
+        <div>
+            <h1>상세페이지</h1>
+        </div>
+        <h3 style="color: red;"><?php echo isset($this->errMsg) ? $this->errMsg : "" ; ?></h3>
+        <?php echo isset($this->resultHTML) ? $this->resultHTML : "" ?>
         <button type="button" class="btn btn-outline-dark" onclick="location.href='/product/cart';">장바구니</button>
         <button type="button" class="btn btn-dark">구매하기</button>
     </div>

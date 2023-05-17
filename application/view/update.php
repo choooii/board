@@ -6,8 +6,10 @@
     if ( $httpMethod === "POST" ) {
         $getPost = $_POST;
 
+        $idVal = $getPost["id"];
         $pwVal = $getPost["pw"];
         $nameVal = $getPost["name"];
+        $noVal = $getPost["no"];
 }
 ?>
 <!DOCTYPE html>
@@ -22,16 +24,18 @@
     <title>My Page</title>
 </head>
 <body>
-    <?php require_once(_PATH_HEADER._EXTENSION_PHP) ?>
+    <?php
+    require_once(_PATH_HEADER._EXTENSION_PHP)
+    ?>
     <div class="container">
-        <h1>마이페이지</h1>
+        <h1>회원정보 수정</h1>
         <form action="/user/update" method="post">
             <label for="id">ID</label>
-            <span><?php echo $this->result['u_id'] ?></span>
+            <input class="custom-id" type="text " id="id" name="id" readonly value="<?php echo $httpMethod === 'POST' ? $idVal : $this->result['u_id'] ?>">
             <br>
             <br>
             <label for="pw">PW</label>
-            <input type="text" id="pw" name="pw" value="<?php echo $httpMethod === 'POST' ? $pwVal : $this->result['u_pw'] ?>">
+            <input type="text" id="pw" name="pw">
             <span>
                 <?php if(isset($this->arrError["pw"])) { 
                     echo $this->arrError["pw"]; 
@@ -48,8 +52,9 @@
             </span>
             <br>
             <br>
-            <input type="hidden" name="no" value="<?php echo $this->result['u_no'] ?>">
+            <input type="hidden" name="no" value="<?php echo $httpMethod === 'POST' ? $noVal : $this->result['u_no'] ?>">
             <button class="btn btn-outline-dark btn-sm" type="submit">정보 수정</button>
+            <button class="btn btn-outline-dark btn-sm">회원 탈퇴</button>
         </form>
     </div>
 

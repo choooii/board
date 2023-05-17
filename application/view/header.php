@@ -17,7 +17,7 @@
                 </li>
                 <?php if(array_key_exists(_STR_LOGIN_ID, $_SESSION)) { ?>
                     <li class="nav-item">
-                    <a class="nav-link" href="/user/update">마이페이지</a>
+                    <a class="nav-link" href="/user/info">마이페이지</a>
                     </li>
                     <li class="nav-item">
                     <a class="nav-link" href="/user/logout">로그아웃</a>
