@@ -19,18 +19,44 @@ class UserController extends Controller {
     }
 
     public function infoGet() {
+        $httpMethod = $_SERVER["REQUEST_METHOD"];
         $getSession['id'] = $_SESSION['u_id'];
         $result = $this->echoUserInfo($getSession);
-
+        
+        $this->addDynamicProperty("httpMethod", $httpMethod);
         $this->addDynamicProperty('result', $result);
         return "info"._EXTENSION_PHP;
     }
+
+    public function infoPost() {
+        $result = $this->model->getUser($_POST);
+        $this->model->closeConn();
+        
+        // 확인 체크
+        if (count($result) === 0) {
+            $httpMethod = $_SERVER["REQUEST_METHOD"];
+            if ($httpMethod === "POST") {
+                $getPost = $_POST;
+                $nameVal = $getPost["name"];
+            }
+
+            $errMsg = "비밀번호가 일치하지 않습니다.";
+            $this->addDynamicProperty("errMsg", $errMsg);
+            $this->addDynamicProperty("httpMethod", $httpMethod);
+            $this->addDynamicProperty("nameVal", $nameVal);
+            // 회원정보 페이지 리턴
+            return "info"._EXTENSION_PHP;
+        }
+
+        return _BASE_REDIRECT."/user/update";
+    }
+
 
     public function loginPost() {
         $result = $this->model->getUser($_POST);
         $this->model->closeConn();
         // 유저 유무 체크
-        if (count($result) === 0 ) {
+        if (count($result) === 0) {
             $errMsg = "입력하신 회원정보가 없습니다";
             $this->addDynamicProperty("errMsg", $errMsg);
             // 로그인 페이지 리턴
@@ -78,12 +104,12 @@ class UserController extends Controller {
         }
         
         // todo 비밀번호 영문 숫자 특수문자 체크
+        
 
         // 이름 글자수 체크
         if(mb_strlen($arr["name"]) > 30 || mb_strlen($arr["name"]) < 3) {
             $arrChk["name"] = "이름은 30글자 이하 3글자 이상으로 입력해주세요.";
         }
-
 
         return $arrChk;
     }
@@ -99,8 +125,9 @@ class UserController extends Controller {
         }
         
         $result = $this->model->getUser($arrPost, false);
+        $this->model->closeConn();
         // 중복 결과 유무 체크
-        if (count($result) !== 0 ) {
+        if (count($result) !== 0) {
             $errMsg = "입력하신 ID가 사용중입니다.";
             $this->addDynamicProperty("errMsg", $errMsg);
             // 회원가입 페이지 페이지 리턴
@@ -153,7 +180,7 @@ class UserController extends Controller {
         // *** transaction End
 
         // 업데이트 페이지 리다이렉트
-        return _BASE_REDIRECT."/user/update";
+        return _BASE_REDIRECT."/user/info";
     }
 
     public function echoUserInfo($getSession) {
@@ -169,4 +196,37 @@ class UserController extends Controller {
         return $result[0];
     }
 
+    // 회원 탈퇴
+    public function outPost() {
+        $arrPost = $_POST;
+
+        $result = $this->model->getUser($arrPost);
+        // 중복 결과 유무 체크
+        if (count($result) !== 1 ) {
+            $errMsg = "비밀번호가 일치하지 않습니다.";
+            $this->addDynamicProperty("errMsg", $errMsg);
+            // 회원가입 페이지 페이지 리턴
+            return "update"._EXTENSION_PHP;
+        }
+
+        // *** transaction start
+        $this->model->beginTransaction();
+
+        // user insert
+        if(!$this->model->updateUserOut($arrPost)) {
+            // 예외처리 롤백
+            echo "User Out Error";
+            $this->model->rollBack();
+            exit();
+        };
+        // 정상처리 커밋
+        $this->model->commit();
+        // *** transaction End
+
+        session_unset();
+        session_destroy();
+
+        // 로그인 페이지로 이동
+        return _BASE_REDIRECT."/product/home";
+    }
 }

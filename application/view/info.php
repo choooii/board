@@ -15,19 +15,24 @@
     ?>
     <div class="container">
         <h1>마이페이지</h1>
-        <form action="/user/update" method="post">
+        <form action="/user/info" method="post" id="userInfoForm">
             <label for="id">ID</label>
-            <span><?php echo $this->result['u_id'] ?></span>
+            <input type="text" id="id" name="id" class="custom-id" readonly value="<?php echo $_SESSION['u_id'] ?>">
             <br>
             <br>
             <label for="name">이름</label>
-            <span><?php echo $this->result['u_name'] ?></span>
+            <input type="text" id="name" name="name" class="custom-id" readonly value="<?php echo $this->httpMethod === "GET" ? $this->result['u_name'] : $this->nameVal ?>">
             <br>
             <br>
-            <button class="btn btn-outline-dark btn-sm" type="button" onclick="location.href='/user/update';">회원 정보 수정</button>
+            <button class="btn btn-outline-dark btn-sm" type="button" onclick="getPwChkBtn()">회원 정보 수정</button>
+            <br>
+            <br>
         </form>
+        <br>
+        <span><?php echo $this->httpMethod === "GET" ? "" : $this->errMsg ?></span>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="/application/view/js/common.js"></script>
 </body>
 </html>

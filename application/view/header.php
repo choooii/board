@@ -32,8 +32,8 @@
                     </li>
                 <?php }?>
             </ul>
-            <form class="d-flex">
-                <input id="search" class="form-control me-2" type="text" placeholder="Search" aria-label="Search">
+            <form action="/product/search" method="post" class="d-flex">
+                <input name="search" class="form-control me-2" type="text" placeholder="Search" aria-label="Search">
                 <button class="btn" type="submit">
                     <i class="bi bi-search custom-i"></i>
                 </button>

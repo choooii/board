@@ -19,6 +19,9 @@
         <?php echo isset($this->resultHTML) ? $this->resultHTML : "" ?>
         <button type="button" class="btn btn-outline-dark" onclick="location.href='/product/cart';">장바구니</button>
         <button type="button" class="btn btn-dark">구매하기</button>
+        <br>
+        <br>
+        <span></span>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
 </body>

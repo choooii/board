@@ -57,6 +57,21 @@ class ProductController extends Controller {
     }
 
     public function searchPost() {
+        $arrPost = $_POST;
+        $this->addDynamicProperty('searchWord', $arrPost['search']);
+
+        $result = $this->model->getProSearchInfo($arrPost['search']);
+        $this->model->closeConn();
+
+        if (count($result) === 0) {
+            $errMsg = "상품 정보가 없습니다.";
+            $this->addDynamicProperty('errMsg', $errMsg);
+            return "search"._EXTENSION_PHP;
+        }
+
+        $arrResult = $this->echoListHTML($result);
+        $this->addDynamicProperty('arrResult', $arrResult);
+
         return "search"._EXTENSION_PHP;
     }
 

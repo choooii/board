@@ -10,8 +10,8 @@ use \AllowDynamicProperties;
 class Controller {
     protected $model;
     private static $modelList = [];
-    private static $arrNeedAuth = ["product/cart"];
-    private static $arrNeedlessAuth = ["user/login", "user/registration"];
+    private static $arrNeedAuth = ["product/cart", "user/info", "user/update"]; // 로그아웃 했을 때
+    private static $arrNeedlessAuth = ["user/login", "user/registration"]; // 로그인 했을 때
     
     // 생성자
     public function __construct($identityName, $action) {

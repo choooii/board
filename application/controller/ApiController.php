@@ -8,8 +8,8 @@ class ApiController extends Controller {
 
         // model 호출
         $this->model = $this->getModel('User');
-
         $result = $this->model->getUser($arrGet, false);
+        $this->model->closeConn();
         
         // 결과 유무 체크
         if (count($result) !== 0 ) {

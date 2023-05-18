@@ -43,7 +43,7 @@ if ( $httpMethod === "POST" ) {
             <br>
             <br>
             <label for="pw">PW</label>
-            <input type="text" id="pw" name="pw" oninput="chkPassword();">
+            <input type="text" id="pw" name="pw">
             <span>
                 <?php if(isset($this->arrError["pw"])) { 
                     echo $this->arrError["pw"]; 

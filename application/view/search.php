@@ -10,14 +10,24 @@
     <title>Search</title>
 </head>
 <body>
-    <?php require_once(_PATH_HEADER._EXTENSION_PHP) ?>
+    <?php
+        require_once(_PATH_HEADER._EXTENSION_PHP)
+    ?>
     <div class="container">
         <h1>검색</h1>
+        <h3 style="color: red;"><?php echo isset($this->errMsg) ? $this->errMsg : "" ; ?></h3>
+        <h5>검색어 : <? echo $this->searchWord ?></h5>
+        <!-- 카드 -->
+        <div class="row row-cols-xxl-4">
+            <?php
+            if (!empty($this->arrResult)){
+                foreach ($this->arrResult as $val) {
+                    echo $val;
+                }
+            }
+            ?>
+        </div>
     </div>
-
-    <?php
-    var_dump($_POST); 
-    ?>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

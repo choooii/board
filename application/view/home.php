@@ -22,7 +22,7 @@
             <?php 
             foreach ($this->arrResult as $val) {
                 echo $val;
-            } 
+            }
             ?>
         </div>
     </div>

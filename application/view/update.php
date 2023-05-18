@@ -1,7 +1,5 @@
 <?php
     $httpMethod = $_SERVER["REQUEST_METHOD"];
-    $pwVal = "";
-    $nameVal = "";
 
     if ( $httpMethod === "POST" ) {
         $getPost = $_POST;
@@ -9,8 +7,7 @@
         $idVal = $getPost["id"];
         $pwVal = $getPost["pw"];
         $nameVal = $getPost["name"];
-        $noVal = $getPost["no"];
-}
+    }
 ?>
 <!DOCTYPE html>
 <html lang="ko">
@@ -21,7 +18,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.1/font/bootstrap-icons.css">
     <link rel="stylesheet" href="/application/view/css/main.css">
-    <title>My Page</title>
+    <title>회원정보 수정</title>
 </head>
 <body>
     <?php
@@ -29,16 +26,29 @@
     ?>
     <div class="container">
         <h1>회원정보 수정</h1>
-        <form action="/user/update" method="post">
+        <form method="post">
             <label for="id">ID</label>
-            <input class="custom-id" type="text " id="id" name="id" readonly value="<?php echo $httpMethod === 'POST' ? $idVal : $this->result['u_id'] ?>">
+            <input class="custom-id" type="text " id="id" name="id" readonly value="<?php echo $_SESSION['u_id'] ?>">
             <br>
             <br>
             <label for="pw">PW</label>
             <input type="text" id="pw" name="pw">
             <span>
                 <?php if(isset($this->arrError["pw"])) { 
-                    echo $this->arrError["pw"]; 
+                    echo $this->arrError["pw"];
+                    }
+                    if(isset($this->errMsg)) {
+                        echo $this->errMsg;
+                    }
+                ?>
+            </span>
+            <br>
+            <br>
+            <label for="pw">PW 확인</label>
+            <input type="text" id="pwChk" name="pwChk" placeholder="회원탈퇴시에는 필요 없음">
+            <span>
+                <?php if(isset($this->arrError["pwChk"])) { 
+                    echo $this->arrError["pwChk"]; 
                 } ?>
             </span>
             <br>
@@ -52,10 +62,10 @@
             </span>
             <br>
             <br>
-            <input type="hidden" name="no" value="<?php echo $httpMethod === 'POST' ? $noVal : $this->result['u_no'] ?>">
-            <button class="btn btn-outline-dark btn-sm" type="submit">정보 수정</button>
-            <button class="btn btn-outline-dark btn-sm">회원 탈퇴</button>
+            <button class="btn btn-outline-dark btn-sm" type="submit" onclick="javascript: form.action='/user/update'">정보 수정</button>
+            <button class="btn btn-outline-dark btn-sm" type="submit" onclick="javascript: form.action='/user/out'">회원 탈퇴</button>
         </form>
+        <br>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>

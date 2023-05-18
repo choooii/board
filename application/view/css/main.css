@@ -36,6 +36,7 @@ h1 {
 
 label {
     width: 70px;
+    font-weight: 700;
 }
 
 h5 {
@@ -50,6 +51,7 @@ a {
 .img-custom {
     max-width: 30%;
     min-width: 300px;
+    margin-bottom: 10px;
 }
 
 .custom-id {
@@ -58,4 +60,13 @@ a {
     appearance: none;
     border: none;
     outline: none;
+}
+
+input {
+    margin-right: 0.8rem;
+}
+
+input[disabled] {
+    background: none;
+    color: black;
 }

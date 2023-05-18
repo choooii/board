@@ -65,13 +65,34 @@ class UserModel extends Model{
             ." SET "
             ."  u_pw = :u_pw "
             ."  ,u_name = :u_name "
-            ." WHERE u_no = :u_no "
+            ." WHERE u_id = :u_id "
             ;
 
         $prepare = [
             "u_pw" => $arrUserInfo["pw"]
             ,"u_name" => $arrUserInfo["name"]
-            ,"u_no" => $arrUserInfo["no"]
+            ,"u_id" => $arrUserInfo["id"]
+        ];
+
+        try {
+            $stmt = $this->conn->prepare($sql);
+            $result = $stmt->execute($prepare);
+            return $result;
+        } catch(Exception $e) {
+            return false;
+        }
+    }
+
+    public function updateUserOut($arrUserInfo) {
+        $sql = 
+            " Update user_info "
+            ." SET "
+            ."  u_flg = 1 "
+            ." WHERE u_id = :u_id "
+            ;
+
+        $prepare = [
+            "u_id" => $arrUserInfo["id"]
         ];
 
         try {
