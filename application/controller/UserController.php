@@ -81,21 +81,29 @@ class UserController extends Controller {
     public function valChk($arr) {
         $arrChk = [];
         // id 영문자, 숫자 체크
-        $pattern = "/[^a-z0-9]/";
-            if(preg_match($pattern, $arr["id"]) !== 0) {
-                $arrChk["id"] = "ID는 영어 소문자, 숫자만 입력해주세요.";
-                // id 글자수 유효성 체크
-            } else {
-                if(mb_strlen($arr["id"]) > 12 || mb_strlen($arr["id"]) < 4) {
-                    $arrChk["id"] = "ID는 4글자 이상 12글자 이하로 입력해주세요.";
-                }
-            }
-        
-        // PW 글자수 체크
-        if (mb_strlen($arr["pw"]) < 8 || mb_strlen($arr["pw"]) > 20) {
-            $arrChk["pw"] = "비밀번호는 8~20글자로 입력해주세요.";
-        }
+        $pattern1 = "/[^a-z0-9]/u";
+        $pattern2 = "/(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$ %^&*])/u";
+        $pattern3 = "/[^가-힣A-Za-z\d]/u";
 
+        if (preg_match($pattern1, $arr["id"]) !== 0) {
+            $arrChk["id"] = "영어 소문자, 숫자만 입력해주세요.";
+        } else {
+            // id 글자수 유효성 체크
+            if(mb_strlen($arr["id"]) > 12 || mb_strlen($arr["id"]) < 4) {
+                $arrChk["id"] = "4~12자로 입력해주세요.";
+            }
+        }
+        
+        // PW 영소문자 숫자 특수문자 포함여부 체크
+        if (preg_match($pattern2, $arr["pw"]) !== 1) {
+            $arrChk["pw"] = "영어 소문자, 숫자, 특수문자를 포함해주세요.";
+        } else {
+            // PW 글자수 체크
+            if (mb_strlen($arr["pw"]) < 8 || mb_strlen($arr["pw"]) > 20) {
+                $arrChk["pw"] = "8~20자로 입력해주세요.";
+            }
+        }
+        
         // 비밀번호와 비밀번호 체크
         if(array_key_exists("pwChk", $arr)){
             if ($arr["pw"] !== $arr["pwChk"]) {
@@ -103,12 +111,14 @@ class UserController extends Controller {
             }
         }
         
-        // todo 비밀번호 영문 숫자 특수문자 체크
-        
-
-        // 이름 글자수 체크
-        if(mb_strlen($arr["name"]) > 30 || mb_strlen($arr["name"]) < 3) {
-            $arrChk["name"] = "이름은 30글자 이하 3글자 이상으로 입력해주세요.";
+        // 이름 문자 유효성 체크
+        if (preg_match($pattern3, $arr["name"]) !== 0) {
+            $arrChk["name"] = "한글, 영어, 숫자만 입력해주세요.";
+        } else {
+            // 이름 글자수 체크
+            if(mb_strlen($arr["name"]) > 30 || mb_strlen($arr["name"]) < 3) {
+                $arrChk["name"] = "3~30자로 입력해주세요.";
+            }
         }
 
         return $arrChk;
@@ -124,7 +134,7 @@ class UserController extends Controller {
             return "registration"._EXTENSION_PHP;
         }
         
-        $result = $this->model->getUser($arrPost, false);
+        $result = $this->model->getUserThroughId($arrPost["id"]);
         $this->model->closeConn();
         // 중복 결과 유무 체크
         if (count($result) !== 0) {
@@ -148,7 +158,7 @@ class UserController extends Controller {
         $this->model->commit();
         // *** transaction End
 
-        // 로그인 페이지로 이동
+        //로그인 페이지로 이동
         return _BASE_REDIRECT."/user/login";
     }
     

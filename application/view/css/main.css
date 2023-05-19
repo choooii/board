@@ -70,3 +70,16 @@ input[disabled] {
     background: none;
     color: black;
 }
+
+#pwChkDiv {
+    padding-left: 4.8rem;
+    padding-top: 0.3rem;
+}
+
+.pwChkSpan {
+    font-size: 0.8rem;
+}
+
+.pwChkSpanColor {
+    color: rgb(65, 194, 123);
+}

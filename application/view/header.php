@@ -15,7 +15,7 @@
                 <li class="nav-item">
                     <a class="nav-link" href="/product/list?cate_no=3" id="cate3">신발</a>
                 </li>
-                <?php if(array_key_exists(_STR_LOGIN_ID, $_SESSION)) { ?>
+                <?php if(isset($_SESSION[_STR_LOGIN_ID])) { ?>
                     <li class="nav-item">
                     <a class="nav-link" href="/user/info">마이페이지</a>
                     </li>

@@ -31,7 +31,7 @@ if ( $httpMethod === "POST" ) {
                 <span><?php echo $this->errMsg ?></span>
             </div>
         <?php } ?>
-        <form action="/user/registration" method="POST">
+        <form action="/user/registration" method="POST" name="registrationForm">
             <label for="id">ID</label>
             <input type="text" id="id" name="id" value="<? echo $idVal ?>">
             <button type="button" onclick="chkDuplication()" class="btn btn-outline-dark btn-sm">중복체크</button>
@@ -43,16 +43,21 @@ if ( $httpMethod === "POST" ) {
             <br>
             <br>
             <label for="pw">PW</label>
-            <input type="text" id="pw" name="pw">
+            <input type="text" id="pw" name="pw" oninput="chkPwVal();">
             <span>
                 <?php if(isset($this->arrError["pw"])) { 
                     echo $this->arrError["pw"]; 
                 } ?>
             </span>
             <br>
+            <div id="pwChkDiv">
+                <span class="pwChkSpan" id="pwChkSpan1">✔영어소문자</span>
+                <span class="pwChkSpan" id="pwChkSpan2">✔숫자/특수문자</span>
+                <span class="pwChkSpan" id="pwChkSpan3">✔8~20자</span>
+            </div>
             <br>
             <label for="pwChk">PW 확인</label>
-            <input type="text" id="pwChk" name="pwChk" oninput="chkPassword();">
+            <input type="text" id="pwChk" name="pwChk" oninput="chkPwDupl();">
             <span id="chk_pw_msg">
                 <?php if(isset($this->arrError["pwChk"])) { 
                     echo $this->arrError["pwChk"]; 
@@ -62,17 +67,18 @@ if ( $httpMethod === "POST" ) {
             <br>
             <label for="name">이름</label>
             <input type="text" id="name" name="name" value="<? echo $nameVal ?>">
-            <span>
+            <span id="errMsgName">
                 <?php if(isset($this->arrError["name"])) { 
                     echo $this->arrError["name"]; 
                 } ?>
             </span>
             <br>
             <br>
-            <button class="btn btn-outline-dark btn-sm" type="submit">회원가입</button>
+            <button class="btn btn-outline-dark btn-sm" type="button" onclick="joinformCheck()">회원가입</button>
         </form>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
     <script src="/application/view/js/common.js"></script>
+    <script src="/application/view/js/registration.js"></script>
 </body>
 </html>

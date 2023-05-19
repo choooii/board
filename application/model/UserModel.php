@@ -29,6 +29,25 @@ class UserModel extends Model{
         return $result;
     }
 
+    // 탈퇴한 회원 포함 아이디로 검색
+    public function getUserThroughId($userId) {
+        $sql = " SELECT * FROM user_info WHERE u_id = :id ";
+
+        $prepare = [
+            ":id"   => $userId
+        ];
+
+        try {
+            $stmt = $this->conn->prepare($sql);
+            $stmt->execute($prepare);
+            $result = $stmt->fetchAll();
+        } catch(Exception $e) {
+            echo "UserModel->getUser Error : ".$e->getMessage();
+            exit();
+        }
+        return $result;
+    }
+
     // insert user
     public function insertUser($arrUserInfo) {
         $sql = 
